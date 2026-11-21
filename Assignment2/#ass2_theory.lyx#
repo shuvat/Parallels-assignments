@@ -1,0 +1,1197 @@
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+% שפות וכיווניות
+\usepackage{polyglossia}
+\setmainlanguage{hebrew}
+\newfontfamily\hebrewfont[Script=Hebrew]{David CLM}
+\usepackage{bidi}
+
+% מתמטיקה ומשפטים
+\usepackage{amsmath,amsthm}
+
+% מספור לפי section
+\makeatletter
+\@addtoreset{definition}{section}
+\makeatother
+
+\theoremstyle{definition}
+\newtheorem{definition}{הגדרה}
+
+\theoremstyle{plain}
+\newtheorem{lemma}[definition]{למה}
+\newtheorem{theorem}[definition]{משפט}
+
+% תוכן עניינים
+\setcounter{tocdepth}{2}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+\end_modules
+\maintain_unincluded_children no
+\language hebrew
+\language_package none
+\inputencoding utf8
+\fontencoding 
+\font_roman "default" "David CLM"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts true
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format pdf4
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize default
+\spacing other 1.5
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\rightmargin 2.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip 6pt
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style hebrew
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\end_header
+
+\begin_body
+
+\begin_layout Subsection*
+שאלה
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\nospellcheck default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\end_layout
+
+\begin_layout Standard
+תהי 
+\begin_inset Formula $S$
+\end_inset
+
+ מחרוזת המורכבת מתווים וסוגריים ונסמן 
+\begin_inset Formula $|S|=n$
+\end_inset
+
+.
+ נגדיר אלגוריתם שפותר את בעיית ה-
+\begin_inset Formula $Valid\:Parentheses$
+\end_inset
+
+ באופן מקבילי בזמן 
+\begin_inset Formula $O(logn)$
+\end_inset
+
+ כפי שהתבקש בשאלה.
+ האלגוריתם יעבוד באופן הבא:
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+\begin_inset Formula $ALG(S)$
+\end_inset
+
+
+\bar default
+:
+\end_layout
+
+\begin_layout Enumerate
+אם 
+\begin_inset Formula $n=0$
+\end_inset
+
+ נחזיר 
+\begin_inset Formula $True$
+\end_inset
+
+.
+ אחרת,
+ בהינתן 
+\begin_inset Formula $n$
+\end_inset
+
+ תרדים כל תרד מסתכל על 
+\begin_inset Formula $S[i]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+ניצור מערך 
+\begin_inset Formula $B$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n$
+\end_inset
+
+ ובמקביל כל תרד יתן ציון לתו שלו באופן הבא:
+ 
+\begin_inset Formula $B[i]=\begin{cases}
+1 & S[i]=(\\
+-1 & S[i]=)\\
+0 & o.w
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+נריץ 
+\begin_inset Formula $Prefix\:Sum$
+\end_inset
+
+ מקבילי על 
+\begin_inset Formula $B$
+\end_inset
+
+,
+ כך ש-
+\begin_inset Formula $B[i]$
+\end_inset
+
+ מכיל כעת את הסכום המצטבר עד התא ה-
+\begin_inset Formula $i$
+\end_inset
+
+ כולל.
+\end_layout
+
+\begin_layout Enumerate
+ניצור מערך עזר נוסף 
+\begin_inset Formula $C$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n$
+\end_inset
+
+,
+ בו כל תרד יבדוק במקביל את התא שלו ב-
+\begin_inset Formula $B$
+\end_inset
+
+ ויעדכן 
+\begin_inset Formula $C[i]=\begin{cases}
+1 & B[i]<0\\
+0 & o.w
+\end{cases}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+נריץ 
+\begin_inset Formula $Prefix\:Sum$
+\end_inset
+
+ מקבילי על 
+\begin_inset Formula $C$
+\end_inset
+
+,
+ כך שלאחריו התא האחרון במערך 
+\begin_inset Formula $C$
+\end_inset
+
+ מכיל את מספר התאים ב-
+\begin_inset Formula $B$
+\end_inset
+
+ בהם הסכום שלילי.
+ 
+\end_layout
+
+\begin_layout Enumerate
+אם 
+\begin_inset Formula $B[n-1]\neq0$
+\end_inset
+
+ או 
+\begin_inset Formula $C[n-1]\neq0$
+\end_inset
+
+ נחזיר 
+\begin_inset Formula $False$
+\end_inset
+
+.
+ אחרת,
+ נחזיר 
+\begin_inset Formula $True$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+נכונות:
+
+\series default
+\bar default
+ לאחר חישוב 
+\begin_inset Formula $Prefix\:Sum$
+\end_inset
+
+ על 
+\begin_inset Formula $B$
+\end_inset
+
+,
+ כל 
+\begin_inset Formula $B[i]$
+\end_inset
+
+ מכיל את מספר הסוגריים פותחים פחות מספר הסוגרים בקידומת 
+\begin_inset Formula $S[0..i]$
+\end_inset
+
+.
+ מהגדרת 
+\begin_inset Formula $C$
+\end_inset
+
+,
+ מתקיים 
+\begin_inset Formula $C[n-1]=0$
+\end_inset
+
+ אם ורק אם כל הסכומים המצטברים ב־
+\begin_inset Formula $B$
+\end_inset
+
+ אינם שליליים.
+\end_layout
+
+\begin_layout Standard
+נוכיח שהאלגוריתם מחזיר 
+\begin_inset Formula $True$
+\end_inset
+
+ אם ורק אם הסוגריים מאוזנים:
+\end_layout
+
+\begin_layout Standard
+אם הסוגריים מאוזנים,
+ בכל קידומת מספר הסוגרים אינו עולה על מספר הפותחים,
+ ולכן 
+\begin_inset Formula $C[n-1]=0$
+\end_inset
+
+.
+ בנוסף,
+ מספר הפותחים והסוגרים הכולל שווה,
+ ולכן 
+\begin_inset Formula $B[n-1]=0$
+\end_inset
+
+.
+ מכאן שהאלגוריתם מחזיר 
+\begin_inset Formula $True$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+אם האלגוריתם מחזיר 
+\begin_inset Formula $True$
+\end_inset
+
+,
+ כל סכום מצטבר אינו שלילי,
+ ולכן לכל סוגר סוגר קיים סוגר פותח שקדם לו,
+ כך קיים סוגר פותח מקונן כראוי לכל סוגר סוגר.
+ כך ההתאמה מקוננת כראוי.
+ מאחר ש־
+\begin_inset Formula $B[n-1]=0$
+\end_inset
+
+,
+ מספר הפותחים והסוגרים שווה,
+ ולכן לא נותר פותח ללא התאמה.
+ מכאן שהסוגריים מאוזנים.
+ בנוסף,
+ עבור מחרוזת ריקה האלגוריתם מחזיר 
+\begin_inset Formula $True$
+\end_inset
+
+,
+ כנדרש.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+זמן ריצה:
+
+\series default
+\bar default
+ נשים לב כי בהינתן 
+\begin_inset Formula $\ensuremath{n}$
+\end_inset
+
+ מעבדים,
+ שלבי הבדיקות המקומיות ובדיקת התנאים בסוף לוקחים זמן קבוע,
+ משום שכל תרד מטפל בתא שלו במקביל וללא תלות בתרדים האחרים.
+ בנוסף,
+ כפי שראינו בכיתה,
+ 
+\begin_inset Formula $Prefix\;Sum$
+\end_inset
+
+ מקבילי לוקח 
+\begin_inset Formula $O(logn)$
+\end_inset
+
+.
+ אנו מבצעים אותו מספר קבוע של פעמים,
+ ולכן זמן הריצה הכולל הוא:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+O(1)+O(logn)+O(1)+O(logn)+O(1)=O(logn)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+שאלה
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\nospellcheck default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2
+\end_layout
+
+\begin_layout Subsubsection*
+סעיף
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\nospellcheck default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\end_layout
+
+\begin_layout Standard
+יהי מערך 
+\begin_inset Formula $A$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n$
+\end_inset
+
+ שמכיל מספרים חיוביים בלבד,
+ ויהי 
+\begin_inset Formula $b$
+\end_inset
+
+ סכום יעד.
+ נתאר אלגוריתם למציאת מספר תתי המערך שסכומם הם סכום היעד שיעבוד באופן הבא:
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+\begin_inset Formula $ALG(A,b)$
+\end_inset
+
+
+\bar default
+:
+\end_layout
+
+\begin_layout Enumerate
+אם 
+\begin_inset Formula $n=0$
+\end_inset
+
+ או 
+\begin_inset Formula $b\leq0$
+\end_inset
+
+ נחזיר
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\nospellcheck default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+0
+\numeric off
+.
+\end_layout
+
+\begin_layout Enumerate
+ניצור מערך 
+\begin_inset Formula $B$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n+1$
+\end_inset
+
+,
+ ונגדיר 
+\begin_inset Formula $B[0]=0$
+\end_inset
+
+.
+ נריץ 
+\begin_inset Formula $Prefix\:Sum$
+\end_inset
+
+ מקבילי על 
+\begin_inset Formula $A$
+\end_inset
+
+ ונאחסן את התוצאות במערך 
+\begin_inset Formula $B$
+\end_inset
+
+ כך שיתקיים 
+\begin_inset Formula $B[i+1]=\sum_{k=0}^{i}A[k]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+ניצור מערך 
+\begin_inset Formula $C$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ בהינתן 
+\begin_inset Formula $n$
+\end_inset
+
+ תרדים,
+ כל תרד 
+\begin_inset Formula $i$
+\end_inset
+
+ יבצע חיפוש בינארי על תת המערך 
+\begin_inset Formula $B[i+1\dots n]$
+\end_inset
+
+ אחר הערך 
+\begin_inset Formula $B[i]+b$
+\end_inset
+
+ ויעדכן את 
+\begin_inset Formula $C$
+\end_inset
+
+ באופן הבא:
+ 
+\begin_inset Formula $C[i]=\begin{cases}
+1 & val\:found\\
+0 & o.w
+\end{cases}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+נריץ 
+\begin_inset Formula $Prefix\:Sum$
+\end_inset
+
+ מקבילי על 
+\begin_inset Formula $C$
+\end_inset
+
+ ונחזיר את 
+\begin_inset Formula $C[n-1]$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+נכונות:
+
+\series default
+\bar default
+ נשים לב כי לכל 
+\begin_inset Formula $0\leq i\leq j\leq n-1$
+\end_inset
+
+ מתקיים כי סכום תת המערך מורכב מהפרש ה-
+\begin_inset Formula $Pefix\:Sum$
+\end_inset
+
+ באופן הבא:
+ 
+\begin_inset Formula $\sum_{k=i}^{j}A[k]=B[j+1]-B[i]$
+\end_inset
+
+.
+ אם כן,
+ כדי שסכום תת המערך יהיה שווה ל-
+\begin_inset Formula $b$
+\end_inset
+
+ בדיוק נצטרך שיתקיים כי 
+\begin_inset Formula $B[j+1]=B[i]+b$
+\end_inset
+
+.
+ בנוסף,
+ נשים לב כי נוכל לבצע חיפוש בינארי על מערך 
+\begin_inset Formula $B$
+\end_inset
+
+ משום שהוא עולה ממש ולכן בפרט ממוין,
+ מהנתון כי כל איברי מערך הקלט 
+\begin_inset Formula $A$
+\end_inset
+
+ הם חיוביים.
+ לכן,
+ 
+\begin_inset Formula $C[i]=1$
+\end_inset
+
+ אמ
+\begin_inset Quotes drd
+\end_inset
+
+מ קיים תת מערך שמתחיל באינדקס 
+\begin_inset Formula $i$
+\end_inset
+
+ וסכומו שווה ל-
+\begin_inset Formula $b$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+כל תת מערך נספר פעם אחת,
+ ע
+\begin_inset Quotes drd
+\end_inset
+
+י תרד 
+\begin_inset Formula $i$
+\end_inset
+
+ שהוא האינדקס ממנו מתחיל תת המערך.
+ אם כן,
+ לאחר 
+\begin_inset Formula $Prefix\;Sum$
+\end_inset
+
+ על מערך 
+\begin_inset Formula $C$
+\end_inset
+
+,
+ הערך 
+\begin_inset Formula $C[n-1]$
+\end_inset
+
+ הוא מספר תתי המערכים המקיים את הדרוש.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+זמן ריצה:
+
+\series default
+\bar default
+ בהינתן 
+\begin_inset Formula $n$
+\end_inset
+
+ מעבדים,
+ חישוב 
+\begin_inset Formula $Prefix\;Sum$
+\end_inset
+
+ מקבילי לוקח 
+\begin_inset Formula $O(logn)$
+\end_inset
+
+.
+ בנוסף,
+ כל חיפוש בינארי לוקח 
+\begin_inset Formula $O(logn)$
+\end_inset
+
+ גם כן,
+ וכל החיפושים מתבצעים במקביל.
+ הבדיקות בסעיף
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\nospellcheck default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\numeric off
+,
+ ביצוע הכתיבה למערך 
+\begin_inset Formula $C$
+\end_inset
+
+ והחזרת התוצאה הסופית לוקחים זמן קבוע ולכן זמן הריצה הכולל הוא 
+\begin_inset Formula $O(logn)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+סעיף
+\family roman
+\series bold
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\nospellcheck default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2
+\end_layout
+
+\begin_layout Standard
+יהי מערך 
+\begin_inset Formula $A$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n$
+\end_inset
+
+ שמכיל מספרים שלמים,
+ עם אפשרות לערכים חיוביים,
+ שליליים ואפסים,
+ ויהי 
+\begin_inset Formula $b$
+\end_inset
+
+ סכום יעד.
+ נתאר אלגוריתם למציאת מספר תתי המערך שסכומם הם סכום היעד שיעבוד באופן הבא:
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+\begin_inset Formula $ALG(A,b)$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Enumerate
+אם 
+\begin_inset Formula $n=0$
+\end_inset
+
+ ,
+ נחזיר
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\nospellcheck default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+0
+\numeric off
+.
+\end_layout
+
+\begin_layout Enumerate
+ניצור מערך 
+\begin_inset Formula $B$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n+1$
+\end_inset
+
+,
+ ונגדיר 
+\begin_inset Formula $B[0]=0$
+\end_inset
+
+.
+ נריץ 
+\begin_inset Formula $Prefix\:Sum$
+\end_inset
+
+ מקבילי על 
+\begin_inset Formula $A$
+\end_inset
+
+ ונאחסן את התוצאות במערך 
+\begin_inset Formula $B$
+\end_inset
+
+ כך שיתקיים 
+\begin_inset Formula $B[i+1]=\sum_{k=0}^{i}A[k]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+ניצור מערך 
+\begin_inset Formula $D$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n+1$
+\end_inset
+
+ שכל איבר בו יוגדר באופן הבא:
+ 
+\begin_inset Formula $D[i]=(B[i],i)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+נמיין את מערך 
+\begin_inset Formula $D$
+\end_inset
+
+ בעזרת 
+\begin_inset Formula $Odd-Even\:Merge\:Sort$
+\end_inset
+
+ מקבילי שראינו בכיתה לפי הרכיב הראשון.
+ אם יש שוויון נמיין לפי הרכיב השני.
+\end_layout
+
+\begin_layout Enumerate
+ניצור מערך 
+\begin_inset Formula $C$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ כל תרד 
+\begin_inset Formula $i$
+\end_inset
+
+ יאחסן משתנה 
+\begin_inset Formula $t=B[i]+b$
+\end_inset
+
+.
+ את הזוגות שהרכיב הראשון שלהם שווה ל־
+\begin_inset Formula $B[i]+b$
+\end_inset
+
+,
+ והרכיב השני שלהם גדול מ־
+\begin_inset Formula $i$
+\end_inset
+
+.
+ כדי לספור אותם,
+ כל תרד יבצע שני חיפושים בינאריים באופן הבא:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+ימצא את מיקום הזוג המתאים הראשון,
+ נסמנו 
+\begin_inset Formula $d_{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+ימצא את המיקום הראשון אחרי הזוגות המתאימים ונסמנו 
+\begin_inset Formula $d_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+אם מצאנו זוג מתאים בשני החיפושים נסמן 
+\begin_inset Formula $C[i]=d_{2}-d_{1}$
+\end_inset
+
+.
+ אחרת,
+ נסמן 
+\begin_inset Formula $C[i]=0$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+נבצע 
+\begin_inset Formula $Prefix\;Sum$
+\end_inset
+
+ מקבילי על 
+\begin_inset Formula $C$
+\end_inset
+
+ ונחזיר את 
+\begin_inset Formula $C[n-1]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+נכונות:
+
+\series default
+\bar default
+ נשים לב כי לכל 
+\begin_inset Formula $0\le i\le j\le n-1$
+\end_inset
+
+ מתקיים:
+ 
+\begin_inset Formula $\sum_{k=i}^{j}A[k]=B[j+1]-B[i]$
+\end_inset
+
+.
+ אם כן,
+ סכום תת מערך שווה ל-
+\begin_inset Formula $b$
+\end_inset
+
+ אם מתקיים:
+ 
+\begin_inset Formula $B[j+1]=B[i]+b$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+עבור 
+\begin_inset Formula $i$
+\end_inset
+
+ שהוא אינדקס ממנו מתחיל תת מערך כזה,
+ עלינו לספור את כל האינדקסים 
+\begin_inset Formula $k\ge i+1$
+\end_inset
+
+ שעבורם 
+\begin_inset Formula $B[k]=B[i]+b$
+\end_inset
+
+,
+ כלומר נצ.
+ משום שמיינו את מערך 
+\begin_inset Formula $D$
+\end_inset
+
+ לפי הרכיב הראשון ולאחר מכן לפי הרכיב השני במידה ויש שוויון,
+ הזוגות האלה נמצאים בדיוק בטווח 
+\backslash
+([L_i,R_i)
+\backslash
+):
+ הרכיב הראשון שלהם הוא 
+\backslash
+(t
+\backslash
+),
+ והרכיב השני שלהם לפחות 
+\backslash
+(i+1
+\backslash
+).
+ לכן מספרם הוא 
+\backslash
+(C[i]=R_i-L_i
+\backslash
+).
+\end_layout
+
+\begin_layout Standard
+כל תת־מערך מתאים נספר פעם אחת,
+ על ידי התרד שמטפל באינדקס ההתחלה שלו.
+ לכן לאחר Prefix Sum על 
+\backslash
+(C
+\backslash
+),
+ הערך 
+\backslash
+(C[n-1]
+\backslash
+) הוא מספר תתי־המערכים המבוקש.
+ עבור מערך ריק החזרת 
+\backslash
+(0
+\backslash
+) נכונה.
+\end_layout
+
+\end_body
+\end_document
