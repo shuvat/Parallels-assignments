@@ -1273,5 +1273,708 @@ O(1)+O(logn)+O(1)+O(logn)+O(1)=O(logn)
 .
 \end_layout
 
+\begin_layout Subsection*
+שאלה
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\nospellcheck default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+3
+\end_layout
+
+\begin_layout Standard
+יהי עץ מושרש עם 
+\begin_inset Formula $n$
+\end_inset
+
+ צמתים ויהי 
+\begin_inset Formula $P$
+\end_inset
+
+ מערך האבות שלו, כאשר עבור השורש 
+\begin_inset Formula $r$
+\end_inset
+
+ מתקיים 
+\begin_inset Formula $P[r]=r$
+\end_inset
+
+. נסמן ב-
+\begin_inset Formula $anc(v,t)$
+\end_inset
+
+ את הקדמון של 
+\begin_inset Formula $v$
+\end_inset
+
+ במרחק 
+\begin_inset Formula $t$
+\end_inset
+
+, ואם אין כזה 
+\begin_inset Formula $anc(v,t)=-1$
+\end_inset
+
+. נגדיר אלגוריתם שמחשב לכל צומת 
+\begin_inset Formula $v$
+\end_inset
+
+ את 
+\begin_inset Formula $anc(v,k)$
+\end_inset
+
+ באופן מקבילי בזמן 
+\begin_inset Formula $O(logk\cdot logn)$
+\end_inset
+
+ כפי שהתבקש בשאלה, בעזרת 
+\begin_inset Formula $Pointer\:Jumping$
+\end_inset
+
+ שראינו בכיתה. האלגוריתם יעבוד באופן הבא:
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+\begin_inset Formula $ALG(P,k)$
+\end_inset
+
+
+\bar default
+:
+\end_layout
+
+\begin_layout Enumerate
+בהינתן 
+\begin_inset Formula $n$
+\end_inset
+
+ תרדים, כל תרד אחראי על צומת 
+\begin_inset Formula $v$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+ניצור מערך 
+\begin_inset Formula $J$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n$
+\end_inset
+
+ ובמקביל כל תרד יעדכן את התא שלו באופן הבא: 
+\begin_inset Formula $J[v]=\begin{cases}
+-1 & P[v]=v\\
+P[v] & o.w
+\end{cases}$
+\end_inset
+
+. בנוסף, ניצור מערך 
+\begin_inset Formula $res$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n$
+\end_inset
+
+ ונאתחל 
+\begin_inset Formula $res[v]=v$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+נבצע 
+\begin_inset Formula $\lfloor logk\rfloor+1$
+\end_inset
+
+ סבבים (אם 
+\begin_inset Formula $k=0$
+\end_inset
+
+ לא נבצע אף סבב). בסבב ה-
+\begin_inset Formula $j$
+\end_inset
+
+ כל תרד יבצע במקביל את הפעולות הבאות, כאשר הקריאה היא מהמערכים של הסבב הקודם והכתיבה היא למערכים חדשים:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+אם הביט ה-
+\begin_inset Formula $j$
+\end_inset
+
+ של 
+\begin_inset Formula $k$
+\end_inset
+
+ הוא 
+\begin_inset Formula $1$
+\end_inset
+
+ וגם 
+\begin_inset Formula $res[v]\neq-1$
+\end_inset
+
+, נעדכן 
+\begin_inset Formula $res[v]\leftarrow J[res[v]]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+אם 
+\begin_inset Formula $J[v]\neq-1$
+\end_inset
+
+ נעדכן 
+\begin_inset Formula $J[v]\leftarrow J[J[v]]$
+\end_inset
+
+. אחרת, 
+\begin_inset Formula $J[v]$
+\end_inset
+
+ נשאר 
+\begin_inset Formula $-1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+בסוף הסבב נבצע סנכרון בין כל התרדים.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+נחזיר את 
+\begin_inset Formula $res$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+נכונות:
+
+\series default
+\bar default
+ נוכיח באינדוקציה על 
+\begin_inset Formula $j$
+\end_inset
+
+ שלאחר הסבב ה-
+\begin_inset Formula $j$
+\end_inset
+
+ מתקיים 
+\begin_inset Formula $J[v]=anc(v,2^{j+1})$
+\end_inset
+
+ וגם 
+\begin_inset Formula $res[v]=anc(v,k\:mod\:2^{j+1})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+בסיס: לאחר האתחול, לכל 
+\begin_inset Formula $v\neq r$
+\end_inset
+
+ מתקיים 
+\begin_inset Formula $J[v]=P[v]=anc(v,1)$
+\end_inset
+
+, ועבור השורש 
+\begin_inset Formula $J[r]=-1=anc(r,1)$
+\end_inset
+
+ כי לשורש אין אב. בנוסף 
+\begin_inset Formula $res[v]=v=anc(v,0)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+צעד: לפי הנחת האינדוקציה 
+\begin_inset Formula $J[v]=anc(v,2^{j})$
+\end_inset
+
+, ולכן 
+\begin_inset Formula $J[J[v]]=anc(anc(v,2^{j}),2^{j})=anc(v,2^{j+1})$
+\end_inset
+
+, כי שתי קפיצות של 
+\begin_inset Formula $2^{j}$
+\end_inset
+
+ הן קפיצה אחת של 
+\begin_inset Formula $2^{j+1}$
+\end_inset
+
+. אם אחת הקפיצות עוברת את השורש, גם הקפיצה הכוללת עוברת אותו, והערך 
+\begin_inset Formula $-1$
+\end_inset
+
+ נשמר. באופן דומה, אם הביט ה-
+\begin_inset Formula $j$
+\end_inset
+
+ של 
+\begin_inset Formula $k$
+\end_inset
+
+ הוא 
+\begin_inset Formula $1$
+\end_inset
+
+, אז 
+\begin_inset Formula $res[v]$
+\end_inset
+
+ מתקדם מ-
+\begin_inset Formula $anc(v,k\:mod\:2^{j})$
+\end_inset
+
+ בעוד 
+\begin_inset Formula $2^{j}$
+\end_inset
+
+ צעדים ומתקבל 
+\begin_inset Formula $anc(v,k\:mod\:2^{j+1})$
+\end_inset
+
+. אחרת, 
+\begin_inset Formula $k\:mod\:2^{j+1}=k\:mod\:2^{j}$
+\end_inset
+
+ ו-
+\begin_inset Formula $res[v]$
+\end_inset
+
+ לא משתנה.
+\end_layout
+
+\begin_layout Standard
+לאחר הסבב האחרון מתקיים 
+\begin_inset Formula $k\:mod\:2^{\lfloor logk\rfloor+1}=k$
+\end_inset
+
+, ולכן 
+\begin_inset Formula $res[v]=anc(v,k)$
+\end_inset
+
+ כנדרש. בנוסף, בתוך כל סבב כל תרד קורא רק ערכים מהסבב הקודם וכותב רק לתא שלו, ולכן אין התנגשויות בין התרדים.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+זמן ריצה:
+
+\series default
+\bar default
+ בהינתן 
+\begin_inset Formula $n$
+\end_inset
+
+ מעבדים, האתחול לוקח זמן קבוע, משום שכל תרד מטפל בתא שלו במקביל. מספר הסבבים הוא 
+\begin_inset Formula $\lfloor logk\rfloor+1=O(logk)$
+\end_inset
+
+, ובכל סבב כל תרד מבצע מספר קבוע של פעולות. כפי שראינו בכיתה, הסנכרון בסוף כל סבב מתבצע בעזרת עץ סנכרון ולוקח 
+\begin_inset Formula $O(logn)$
+\end_inset
+
+. לכן זמן הריצה הכולל הוא:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+O(1)+O(logk)\cdot\left(O(1)+O(logn)\right)=O(logk\cdot logn)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+שאלה
+\family roman
+\series bold
+\shape up
+\size large
+\emph off
+\nospellcheck off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\nospellcheck default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+4
+\end_layout
+
+\begin_layout Standard
+יהי מערך 
+\begin_inset Formula $height$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n$
+\end_inset
+
+. נשים לב כי כמות המים שנכלאת מעל עמודה 
+\begin_inset Formula $i$
+\end_inset
+
+ נקבעת לפי העמודה הגבוהה ביותר משמאלה והעמודה הגבוהה ביותר מימינה: המים עולים עד לגובה הנמוך מבין שתיהן. נגדיר אלגוריתם שמחשב את כמות המים הכוללת באופן מקבילי בזמן 
+\begin_inset Formula $O(logn)$
+\end_inset
+
+. האלגוריתם יעבוד באופן הבא:
+\end_layout
+
+\begin_layout Standard
+
+\bar under
+\begin_inset Formula $ALG(height)$
+\end_inset
+
+
+\bar default
+:
+\end_layout
+
+\begin_layout Enumerate
+אם 
+\begin_inset Formula $n=0$
+\end_inset
+
+ נחזיר 
+\begin_inset Formula $0$
+\end_inset
+
+. אחרת, בהינתן 
+\begin_inset Formula $n$
+\end_inset
+
+ תרדים כל תרד מסתכל על 
+\begin_inset Formula $height[i]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+ניצור מערך 
+\begin_inset Formula $L$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n$
+\end_inset
+
+ ונריץ 
+\begin_inset Formula $Prefix\:Sum$
+\end_inset
+
+ מקבילי על 
+\begin_inset Formula $height$
+\end_inset
+
+, כאשר במקום פעולת החיבור נשתמש בפעולת 
+\begin_inset Formula $max$
+\end_inset
+
+, כך שיתקיים 
+\begin_inset Formula $L[i]=\max(height[0..i])$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+במקביל לשלב הקודם, ניצור מערך 
+\begin_inset Formula $R$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n$
+\end_inset
+
+ ונריץ באופן דומה 
+\begin_inset Formula $Prefix\:Sum$
+\end_inset
+
+ מקבילי עם 
+\begin_inset Formula $max$
+\end_inset
+
+ מימין לשמאל, כך שיתקיים 
+\begin_inset Formula $R[i]=\max(height[i..n-1])$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+ניצור מערך 
+\begin_inset Formula $W$
+\end_inset
+
+ בגודל 
+\begin_inset Formula $n$
+\end_inset
+
+, ובמקביל כל תרד יעדכן 
+\begin_inset Formula $W[i]=\min(L[i],R[i])-height[i]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+נריץ 
+\begin_inset Formula $Prefix\:Sum$
+\end_inset
+
+ מקבילי על 
+\begin_inset Formula $W$
+\end_inset
+
+ ונחזיר את 
+\begin_inset Formula $W[n-1]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+נכונות:
+
+\series default
+\bar default
+ האלגוריתם של 
+\begin_inset Formula $Prefix\:Sum$
+\end_inset
+
+ שראינו בכיתה מסתמך רק על כך שפעולת החיבור אסוציאטיבית. גם 
+\begin_inset Formula $max$
+\end_inset
+
+ היא פעולה אסוציאטיבית, ולכן לאחר שלבים 
+\begin_inset Formula $2$
+\end_inset
+
+ ו-
+\begin_inset Formula $3$
+\end_inset
+
+ מתקיים 
+\begin_inset Formula $L[i]=\max(height[0..i])$
+\end_inset
+
+ ו-
+\begin_inset Formula $R[i]=\max(height[i..n-1])$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+נראה שכמות המים מעל עמודה 
+\begin_inset Formula $i$
+\end_inset
+
+ היא בדיוק 
+\begin_inset Formula $W[i]$
+\end_inset
+
+. נסמן 
+\begin_inset Formula $m=\min(L[i],R[i])$
+\end_inset
+
+. המים מעל 
+\begin_inset Formula $i$
+\end_inset
+
+ לא יכולים לעלות מעל 
+\begin_inset Formula $m$
+\end_inset
+
+, כי בצד שבו המקסימום הוא 
+\begin_inset Formula $m$
+\end_inset
+
+ כל העמודות בגובה של לכל היותר 
+\begin_inset Formula $m$
+\end_inset
+
+, ולכן מים מעל 
+\begin_inset Formula $m$
+\end_inset
+
+ היו זולגים החוצה מאותו צד. מצד שני, המים כן מגיעים לגובה 
+\begin_inset Formula $m$
+\end_inset
+
+, כי משני צדי 
+\begin_inset Formula $i$
+\end_inset
+
+ יש עמודות בגובה של לפחות 
+\begin_inset Formula $m$
+\end_inset
+
+ שכולאות אותם. בנוסף, 
+\begin_inset Formula $L[i]$
+\end_inset
+
+ ו-
+\begin_inset Formula $R[i]$
+\end_inset
+
+ כוללים את 
+\begin_inset Formula $height[i]$
+\end_inset
+
+, ולכן 
+\begin_inset Formula $m\geq height[i]$
+\end_inset
+
+ ו-
+\begin_inset Formula $W[i]\geq0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+כמות המים הכוללת היא סכום המים מעל כל העמודות, ולכן לאחר 
+\begin_inset Formula $Prefix\:Sum$
+\end_inset
+
+ על 
+\begin_inset Formula $W$
+\end_inset
+
+ הערך 
+\begin_inset Formula $W[n-1]$
+\end_inset
+
+ הוא כמות המים הכוללת. עבור מערך ריק נחזיר 
+\begin_inset Formula $0$
+\end_inset
+
+, כנדרש.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\bar under
+זמן ריצה:
+
+\series default
+\bar default
+ בהינתן 
+\begin_inset Formula $n$
+\end_inset
+
+ מעבדים, כפי שראינו בכיתה, 
+\begin_inset Formula $Prefix\:Sum$
+\end_inset
+
+ מקבילי לוקח 
+\begin_inset Formula $O(logn)$
+\end_inset
+
+, וזה נכון גם עם 
+\begin_inset Formula $max$
+\end_inset
+
+ כי רק החלפנו את הפעולה. אנו מבצעים אותו מספר קבוע של פעמים. חישוב 
+\begin_inset Formula $W$
+\end_inset
+
+ ובדיקת המקרה 
+\begin_inset Formula $n=0$
+\end_inset
+
+ לוקחים זמן קבוע, משום שכל תרד מטפל בתא שלו במקביל וללא תלות בתרדים האחרים. לכן זמן הריצה הכולל הוא:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+O(1)+O(logn)+O(1)+O(logn)=O(logn)
+\]
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
